@@ -144,4 +144,4 @@ service nova-compute restart
 In OpenContrail you now need to define a new Service Template using the dockwall image and activating aggregation zones.
 Define three interfaces in the Service Template: 1. Left, 2. Right, 3. Mgmt.
 Create the three Virtual Networks as usual and define the Service Instance using the new Service Template.
-Final part is to define the Network Policy using the created Service Instance and assign it to the Left and Right Virtual Network. The dockwall image will now start forwarding traffic from Left to Right VN.
+Final part is to define the Network Policy using the created Service Instance and assign it to the Left and Right Virtual Network. The dockwall image will now start forwarding traffic from Left to Right VN. The dockwall image contains iptables so you can start playing with it by for example activating NAT.
