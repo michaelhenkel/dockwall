@@ -127,3 +127,21 @@ ln -s /usr/lib/python2.7/dist-packages/oslo/i18n /usr/lib/python2.7/dist-package
 ln -s /usr/lib/python2.7/dist-packages/oslo/serialization /usr/lib/python2.7/dist-packages/oslo_serialization
 ```
 
+11.. enable nova docker	   
+On compute node, update /etc/nova/nova-compute.conf to set Nova driver and Docker VIF driver. Remove everything else.
+```
+[DEFAULT]
+compute_driver = novadocker.virt.docker.DockerDriver
+[docker]
+vif_driver = novadocker.virt.docker.opencontrail.OpenContrailVIFDriver
+```
+
+12.. restart nova-compute  
+```
+service nova-compute restart
+```
+
+In OpenContrail you now need to define a new Service Template using the dockwall image and activating aggregation zones.
+Define three interfaces in the Service Template: 1. Left, 2. Right, 3. Mgmt.
+Create the three Virtual Networks as usual and define the Service Instance using the new Service Template.
+Final part is to define the Network Policy using the created Service Instance and assign it to the Left and Right Virtual Network. The dockwall image will now start forwarding traffic from Left to Right VN.
