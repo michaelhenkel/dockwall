@@ -237,3 +237,5 @@ listening on ns26a4d19b, link-type EN10MB (Ethernet), capture size 65535 bytes
 18:35:53.988427 IP 10.0.5.11 > 8.8.8.8: ICMP echo request, id 1263, seq 5, length 64
 18:35:54.000848 IP 8.8.8.8 > 10.0.5.11: ICMP echo reply, id 1263, seq 5, length 64
 ```
+Note that source and destination networks are not directly attached to the container and that 
+there is no static route configured. Both default routes work.
