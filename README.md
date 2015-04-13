@@ -6,7 +6,9 @@ The main modification is the addition of two routing tables inside the Container
 and one for the right Virtual Network. ip rules will forward any traffic ingressing on one to the other interface.
 Additionally the DHCP client in the Container will add the default routes to the correct routing tables.
 
-Start with a standard OpenContrail installation with at least one Compute Node. A Compute Node will be dedicated to host Docker Containers. It cannot server any KVM based VMs anymore!
+The following installation has been done on a Ubuntu 14.04 server with OpenContrail 2.10.
+
+Start with a standard OpenContrail installation with at least one Compute Node. A Compute Node will be dedicated for hosting Docker Containers. It cannot serve any KVM based VMs anymore!
 Best thing is to create an Aggregation Zone and add the Compute Node to it.
 
 On the Controller source the OpenStack credentials, create Aggregate and add Compute Node to it:
