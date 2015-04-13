@@ -1,6 +1,5 @@
-# dockwall 
-# docker based VNF for Contrail Service Chaining
-firewall nfv docker image
+# dockwall
+docker based VNF for Contrail Service Chaining
 
 Dockwall uses a modified nova docker driver to enable docker images to act as OpenContrail Service Instances.
 The main modification is the addition of two routing tables inside the Container allowing for two default routes
