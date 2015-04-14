@@ -23,14 +23,17 @@ mask2cidr() {
 
 echo $reason > /tmp/hookj
 if [ $reason = "BOUND" ]; then
-    echo ip $new_ip_address >> /tmp/hookj
-    echo sn $new_network_number >> /tmp/hookj
-    echo snm $new_subnet_mask >> /tmp/hookj
-    echo gw $new_routers >> /tmp/hookj
-    echo int $interface >> /tmp/hookj
-    echo hn $new_host_name >> /tmp/hookj
-    ip route delete default
-    netm=$(mask2cidr $new_subnet_mask)
-    ip route add $new_network_number/$netm dev $interface src $new_ip_address table $interface
-    ip route add default via $new_routers table $interface
+    grep $interface /etc/iproute2/rt_tables
+    if [ $? -eq 0 ]; then
+        echo ip $new_ip_address >> /tmp/hookj
+        echo sn $new_network_number >> /tmp/hookj
+        echo snm $new_subnet_mask >> /tmp/hookj
+        echo gw $new_routers >> /tmp/hookj
+        echo int $interface >> /tmp/hookj
+        echo hn $new_host_name >> /tmp/hookj
+        ip route delete default via $new_routers
+        netm=$(mask2cidr $new_subnet_mask)
+        ip route add $new_network_number/$netm dev $interface src $new_ip_address table $interface
+        ip route add default via $new_routers table $interface
+    fi
 fi
